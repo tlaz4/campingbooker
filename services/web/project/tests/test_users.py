@@ -120,8 +120,5 @@ class TestUserService(BaseTestCase):
             self.assertIn('testemail@test.com', data['data']['users'][1]['email'])
 
 
-
-
-
 if __name__ == '__main__':
     unittest.main()

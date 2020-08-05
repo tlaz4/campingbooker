@@ -19,7 +19,9 @@ def create_app(script_info=None):
 
     # register the blueprints
     from project.api.users import users_blueprint
+    from project.api.campgrounds import campground_blueprint
     app.register_blueprint(users_blueprint)
+    app.register_blueprint(campground_blueprint)
 
     # shell context for flask cli
     @app.shell_context_processor

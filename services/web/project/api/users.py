@@ -52,6 +52,7 @@ class UsersList(Resource):
 		if not post_data:
 			return response_object, 401
 
+		# try validating the data ensuring it is correct
 		try:
 			validated_data = self.validator.load(post_data)
 			user = User.query.filter_by(email=validated_data['email']).first()
