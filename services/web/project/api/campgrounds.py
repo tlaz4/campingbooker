@@ -13,14 +13,26 @@ api = Api(campground_blueprint)
 class Campgrounds(Resource):
 	# get a campground by its id
 	def get(self, campground_id):
-		campground = Campground.query.filter_by(id=campground_id).first()
-
 		response_object = {
-			'status': 'success',
-			'data': campground.to_json()
+			'status': 'fail',
+			'message': 'Campground does not exist',
 		}
 
-		return response_object, 200
+		try:
+			campground = Campground.query.filter_by(id=campground_id).first()
+
+			if not campground:
+				return response_object, 404
+			else:
+				response_object = {
+					'status': 'success',
+					'data': campground.to_json()
+				}
+
+				return response_object, 200
+
+		except (ValueError, DataError):
+			return response_object, 404
 
 
 api.add_resource(Campgrounds, '/api/campgrounds/<campground_id>')
